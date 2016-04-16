@@ -1,21 +1,21 @@
 var express = require('express');
 var multer  = require('multer');
-var departments = require('../models/departments');
+var classes = require('../models/classes');
 var router = express.Router();
 
 var upload = multer();
 
 router.get('/', function(req, res, next) {
-  departments.getDepartments(res);
+  classes.getClasses(res);
 });
 router.post('/create', function(req, res, next) {
-  departments.setDepartmentCreate(req,res);
+  classes.setClassCreate(req,res);
 });
 router.post('/delete', function(req, res, next) {
-  departments.setDepartmentDelete(req,res);
+  classes.setClassDelete(req,res);
 });
 router.post('/update', function(req, res, next) {
-  departments.setDepartmentUpdate(req,res);
+  classes.setClassUpdate(req,res);
 });
 
 module.exports = router;

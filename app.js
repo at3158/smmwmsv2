@@ -11,6 +11,12 @@ var multer  = require('multer');
 var routes = require('./routes/index');
 var department = require('./routes/department');
 var employee = require('./routes/employee');
+var classes = require('./routes/classes');
+var subclass = require('./routes/subclass');
+var warehouse = require('./routes/warehouse');
+var stock = require('./routes/stock');
+var statuse = require('./routes/status');
+
 var connection = require('./connection');
 connection.init();
 var app = express();
@@ -30,6 +36,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/department',department);
 app.use('/employee',employee);
+app.use('/class',classes);
+app.use('/subclass',subclass);
+app.use('/warehouse',warehouse);
+app.use('/stock',stock);
+app.use('/status',statuse);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

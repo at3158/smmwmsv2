@@ -1,29 +1,24 @@
 var express = require('express');
 var multer  = require('multer');
-var smmwmsv2 = require('../models/smmwmsv2');
+var employees = require('../models/employees');
 var router = express.Router();
 
 var upload = multer();
 
 router.get('/page', function(req, res, next) {
-  var data = smmwmsv2.getEmployees(req,res);
-  res.send(data);
+  employees.getEmployees(req,res);
 });
 router.get('/page/:page', function(req, res, next) {
-  var data = smmwmsv2.getEmployees(req,res);
-  res.send(data);
+  employees.getEmployees(req,res);
 });
 router.post('/create', function(req, res, next) {
-  var data = smmwmsv2.setEmployeeCreate(req,res);
-  res.send(data);
+  employees.setEmployeeCreate(req,res);
 });
 router.post('/delete', function(req, res, next) {
-  var data = smmwmsv2.setEmployeeDelete(req,res);
-  res.send(data);
+  employees.setEmployeeDelete(req,res);
 });
 router.post('/update', function(req, res, next) {
-  var data = smmwmsv2.setEmployeeUpdate(req,res);
-  res.send(data);
+  employees.setEmployeeUpdate(req,res);
 });
 
 module.exports = router;
