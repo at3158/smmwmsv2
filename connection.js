@@ -1,5 +1,6 @@
 var mysql = require("mysql");
-function connection(){
+
+function Connection(){
   this.pool = null;
   this.init = function(){
     this.pool = mysql.createPool({
@@ -10,10 +11,10 @@ function connection(){
     });
   };
   this.acquire = function(callback){
-    this.getConnection(function(err,connection){
+    this.pool.getConnection(function(err,connection){
       callback(err,connection);
     });
   };
 }
 
-module.exports = new connection();
+module.exports = new Connection();
