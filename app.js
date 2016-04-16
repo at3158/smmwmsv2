@@ -10,6 +10,7 @@ var multer  = require('multer');
 
 var routes = require('./routes/index');
 var department = require('./routes/department');
+var employee = require('./routes/employee');
 var connection = require('./connection');
 connection.init();
 var app = express();
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/department',department);
+app.use('/employee',employee);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
