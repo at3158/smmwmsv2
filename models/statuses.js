@@ -3,7 +3,7 @@ var connection = require('../connection');
 function Statuses() {
     //regin 庫存位使用
     //選擇全部
-    this.getStatuss = function(res) {
+    this.getStatuses = function(res) {
         connection.acquire(function(err, con) {
             con.query('select * from status;', function(err, result) {
                 con.release();
@@ -41,9 +41,10 @@ function Statuses() {
                 if (err) {
                     console.log(err);
                     res.send("false");
+                } else {
+                    res.send("true");
                 }
                 con.release();
-                res.send("true");
             });
             console.log(query.sql);
         });
@@ -61,9 +62,10 @@ function Statuses() {
                 if (err) {
                     console.log(err);
                     res.send("false");
+                } else {
+                    res.send("true");
                 }
                 con.release();
-                res.send("true");
             });
             console.log(query.sql);
         });

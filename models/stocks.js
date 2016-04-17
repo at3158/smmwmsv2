@@ -42,9 +42,10 @@ function Stocks() {
                 if (err) {
                     console.log(err);
                     res.send("false");
+                } else {
+                    res.send("true");
                 }
                 con.release();
-                res.send("true");
             });
             console.log(query.sql);
         });
@@ -62,9 +63,10 @@ function Stocks() {
                 if (err) {
                     console.log(err);
                     res.send("false");
+                } else {
+                    res.send("true");
                 }
                 con.release();
-                res.send("true");
             });
             console.log(query.sql);
         });

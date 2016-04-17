@@ -1,27 +1,42 @@
 var connection = require('../connection');
 
-function Departments() {
-    //regin 部門使用
-    //選擇全部
-    this.getDepartments = function(res) {
+function Items() {
+    //region 資產
+    //資產
+    this.getItem = function(req, res) {
         connection.acquire(function(err, con) {
-            var query = con.query('select * from department;', function(err, result) {
+            var query = con.query('select * from item limit ?,?;', [parseInt(page) * 20, (parseInt(page) + 1) * 20], function(err, result) {
                 con.release();
                 res.json(result);
             });
             console.log(query.sql);
         });
     };
-    //建立一筆
-    this.setDepartmentCreate = function(req, res) {
-        var Department = {
+    this.getItems = function(req, res) {
+        var page = (typeof req.params.page != 'undefined' && req.params.page) ? req.params.page : 0;
+        connection.acquire(function(err, con) {
+            var query = con.query('select * from item limit ?,?;', [parseInt(page) * 20, (parseInt(page) + 1) * 20], function(err, result) {
+                con.release();
+                res.json(result);
+            });
+            console.log(query.sql);
+        });
+    };
+    //新增1個員工
+    this.setEmployeeCreate = function(req, res) {
+        var Employee = {
             code: req.body.code,
+            password: req.body.password,
             name: req.body.name,
-            upper_sn: (typeof req.body.upper_sn != 'undefined' && req.body.upper_sn) ? req.body.upper_sn : 0,
-            note: (typeof req.body.note != 'undefined' && req.body.note) ? req.body.note : "無"
+            telephone: req.body.telephone,
+            ext: req.body.ext,
+            address: req.body.address,
+            cellphone: req.body.cellphonee,
+            sex: req.body.sex,
+            department_sn: req.body.department_sn
         };
         connection.acquire(function(err, con) {
-            var query = con.query('insert into department set ?;', Department, function(err, result) {
+            var query = con.query('insert into item set ?;', Employee, function(err, result) {
                 if (err) {
                     console.log(err);
                     res.send("false");
@@ -34,12 +49,12 @@ function Departments() {
         });
     };
     //刪除一筆
-    this.setDepartmentDelete = function(req, res) {
-        var Department = {
+    this.setEmployeeDelete = function(req, res) {
+        var Employee = {
             _sn: (typeof req.body._sn != 'undefined' && req.body._sn) ? req.body._sn : 0
         };
         connection.acquire(function(err, con) {
-            var query = con.query('delete from department where _sn=?;', [Department._sn], function(err, result) {
+            var query = con.query('delete from item where _sn=?;', [Department._sn], function(err, result) {
                 if (err) {
                     console.log(err);
                     res.send("false");
@@ -52,16 +67,21 @@ function Departments() {
         });
     };
     //異動一筆
-    this.setDepartmentUpdate = function(req, res) {
+    this.setEmployeeUpdate = function(req, res) {
         var sn = (typeof req.body._sn != 'undefined' && req.body._sn) ? req.body._sn : 0;
-        var Department = {
+        var Employee = {
             code: req.body.code,
+            password: req.body.password,
             name: req.body.name,
-            upper_sn: (typeof req.body.upper_sn != 'undefined' && req.body.upper_sn) ? req.body.upper_sn : 0,
-            note: (typeof req.body.note != 'undefined' && req.body.note) ? req.body.note : "無"
+            telephone: req.body.telephone,
+            ext: req.body.ext,
+            address: req.body.address,
+            cellphone: req.body.cellphonee,
+            sex: req.body.sex,
+            department_sn: req.body.department_sn
         };
         connection.acquire(function(err, con) {
-            var query = con.query('update  department set ? where _sn=?;', [Department, sn], function(err, result) {
+            var query = con.query('update  item set ? where _sn=?;', [Employee, sn], function(err, result) {
                 if (err) {
                     console.log(err);
                     res.send("false");
@@ -85,4 +105,4 @@ function Departments() {
         return target;
     };
 }
-module.exports = new Departments();
+module.exports = new Items();
