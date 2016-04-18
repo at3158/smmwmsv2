@@ -5,7 +5,7 @@ function Items() {
     //資產
     this.getItem = function(req, res) {
         connection.acquire(function(err, con) {
-            var query = con.query('select * from item limit ?,?;', [parseInt(page) * 20, (parseInt(page) + 1) * 20], function(err, result) {
+            var query = con.query('select * from item where ?;', function(err, result) {
                 con.release();
                 res.json(result);
             });

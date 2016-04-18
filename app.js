@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var multer  = require('multer');
-
+var session = require('express-session');
 
 var routes = require('./routes/index');
 var department = require('./routes/department');
@@ -32,6 +32,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//初始化 Session 的 Cookie
+app.use(session({
+  secret: 'number college tip interest ',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
 
 app.use('/', routes);
 app.use('/department',department);
