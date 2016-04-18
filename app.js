@@ -17,6 +17,8 @@ var subclass = require('./routes/subclass');
 var warehouse = require('./routes/warehouse');
 var stock = require('./routes/stock');
 var status = require('./routes/status');
+var login = require('./routes/login');
+var logout = require('./routes/logout');
 
 var connection = require('./connection');
 var sessions = require('./session');
@@ -57,6 +59,8 @@ app.use(session({
 }));
 
 app.use('/', routes);
+app.use('/login', login);
+app.use('/logout', logout);
 app.use('/department', sessions.getLoginStatus, department);
 app.use('/employee', sessions.getLoginStatus, employee);
 app.use('/class', sessions.getLoginStatus, classes);

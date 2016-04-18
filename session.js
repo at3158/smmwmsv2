@@ -3,12 +3,12 @@ function Sessions() {
     this.getLoginStatus = function(req,res,next) {
         if (req.session.user) {
             //登入是成功的
-            req.session.user = 0;
+            //req.session.user = 0;
             console.log("你登入過");
             next();
         } else {
             // 需要登入
-            req.session.user = 1;
+            //req.session.user = 1;
             // 協定 回傳 XXXX代碼 就是沒登入過，APP 要登入耶~
             res.send("抱歉，你還沒登入過");
             console.log(req.session);
