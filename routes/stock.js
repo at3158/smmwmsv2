@@ -1,6 +1,6 @@
 var express = require('express');
 var multer  = require('multer');
-var classes = require('../models/stocks');
+var stocks = require('../models/stocks');
 var router = express.Router();
 
 var upload = multer();
